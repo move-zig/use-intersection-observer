@@ -1,6 +1,6 @@
 {
   "name": "@davewelsh79/use-intersection-observer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A hook library for creating intersection observers",
   "license": "ISC",
   "author": "Dave Welsh",
