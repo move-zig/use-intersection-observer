@@ -1,12 +1,10 @@
 export const thresholdMet = (ratio: number, threshold?: number | number[]) => {
-  if (typeof threshold === 'undefined') {
-    return true;
+  return ratio >= getThreshold(threshold);
+};
+
+const getThreshold = (threshold?: number | number[]): number => {
+  if (Array.isArray(threshold)) {
+    return Math.max(...threshold);
   }
-  if (typeof threshold === 'number') {
-    return ratio >= threshold;
-  }
-  const largest = Math.max(...threshold);
-  if (largest) {
-    return ratio >= largest;
-  }
+  return threshold ?? 0;
 };

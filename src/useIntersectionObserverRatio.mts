@@ -9,6 +9,8 @@ interface Entry {
 
 type IntersectionResult = [isIntersecting: boolean, intersectionRatio: number, ref: (node: Element | null) => void];
 
+const defaultOptions: IntersectionObserverInit = { threshold: 1 };
+
 /**
  * Asynchronously observe changes in the intersection of a target element with an ancestor element or with a top-level document's viewport.
  *
@@ -16,7 +18,14 @@ type IntersectionResult = [isIntersecting: boolean, intersectionRatio: number, r
  * @param options An IntersectionObserverInit object; should be a stable reference
  * @returns A tuple containing a callback ref to be assigned to the element, the isIntersecting state and the intersectionRatio state
  */
-export const useIntersectionObserverRatio = (once = false, options?: IntersectionObserverInit): IntersectionResult => {
+export const useIntersectionObserverRatio = (once = false, options: IntersectionObserverInit = defaultOptions): IntersectionResult => {
+  if (!options.threshold) {
+    throw Error('No threshold set');
+  }
+  if ((typeof options.threshold === 'string' && options.threshold !== 1) || (Array.isArray(options.threshold) && !options.threshold.includes(1))) {
+    throw Error('Threshold error');
+  }
+
   const [ entry, setEntry ] = useState<Entry>({ isIntersecting: false, intersectionRatio: 0 });
   const [ element, setElement ] = useState<Element | null>(null);
 
@@ -61,14 +70,14 @@ export const useIntersectionObserverRatio = (once = false, options?: Intersectio
         }
 
         // if once is true and we've already intersected, keep prev
-        if (once && prev.isIntersecting && thresholdMet(prev.intersectionRatio, options?.threshold)) {
+        if (once && prev.isIntersecting && thresholdMet(prev.intersectionRatio, options.threshold)) {
           return prev;
         }
 
         return next;
       });
 
-      if (once && thisEntry.isIntersecting && thresholdMet(thisEntry.intersectionRatio, options?.threshold)) {
+      if (once && thisEntry.isIntersecting && thresholdMet(thisEntry.intersectionRatio, options.threshold)) {
         // we don't need it any more
         observer.disconnect();
       }
