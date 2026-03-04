@@ -1,0 +1,65 @@
+{
+  "name": "@davewelsh79/use-intersection-observer",
+  "version": "1.0.0",
+  "description": "A hook library for creating intersection observers",
+  "license": "ISC",
+  "author": "Dave Welsh",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/move-zig/use-intersection-observer.git"
+  },
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc -p tsconfig.build.json --noEmit",
+    "test": "jest --verbose",
+    "test:watch": "jest --verbose --watch",
+    "lint": "eslint"
+  },
+  "devDependencies": {
+    "@eslint/compat": "^2.0.2",
+    "@eslint/js": "^9.39.2",
+    "@faker-js/faker": "^10.3.0",
+    "@stylistic/eslint-plugin": "^5.9.0",
+    "@swc/core": "^1.15.18",
+    "@swc/jest": "^0.2.39",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.11.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.3",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jest": "^29.15.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "jest": "^30.2.0",
+    "jiti": "^2.6.1",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.5.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.56.1"
+  },
+  "peerDependencies": {
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
+  }
+}
