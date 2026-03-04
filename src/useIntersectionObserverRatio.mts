@@ -61,7 +61,7 @@ export const useIntersectionObserverRatio = (once = false, options?: Intersectio
         }
 
         // if once is true and we've already intersected, keep prev
-        if (once && prev.isIntersecting) {
+        if (once && prev.isIntersecting && thresholdMet(prev.intersectionRatio, options?.threshold)) {
           return prev;
         }
 
