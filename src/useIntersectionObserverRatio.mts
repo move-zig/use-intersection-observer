@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import { thresholdMet } from './thresholdMet.mjs';
+
 interface Entry {
   isIntersecting: boolean;
   intersectionRatio: number;
 }
 
-type IntersectionResult = [ isIntersecting: boolean, intersectionRatio: number, ref: (node: Element | null) => void ];
+type IntersectionResult = [isIntersecting: boolean, intersectionRatio: number, ref: (node: Element | null) => void];
 
 /**
  * Asynchronously observe changes in the intersection of a target element with an ancestor element or with a top-level document's viewport.
@@ -66,7 +68,7 @@ export const useIntersectionObserverRatio = (once = false, options?: Intersectio
         return next;
       });
 
-      if (once && thisEntry.isIntersecting) {
+      if (once && thisEntry.isIntersecting && thresholdMet(thisEntry.intersectionRatio, options?.threshold)) {
         // we don't need it any more
         observer.disconnect();
       }

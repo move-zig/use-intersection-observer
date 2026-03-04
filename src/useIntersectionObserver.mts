@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import { thresholdMet } from './thresholdMet.mjs';
+
 type IntersectionResult = [ isIntersecting: boolean, ref: (node: Element | null) => void ];
 
 /**
@@ -45,7 +47,7 @@ export const useIntersectionObserver = (once = false, options?: IntersectionObse
 
       if (thisEntry.isIntersecting) {
         setIsIntersecting(true);
-        if (once) {
+        if (once && thresholdMet(thisEntry.intersectionRatio, options?.threshold)) {
           // we don't need it any more
           observer.disconnect();
         }
