@@ -42,7 +42,7 @@ import { useIntersectionObserver } from '@davewelsh79/use-intersection-observer'
 export const MyComponent: FC = () => {
   const [ isIntersected, ref ] = useIntersectionObserver();
 
-  return <div ref="ref">{isIntersected ? 'true' : 'false'}</div>;
+  return <div ref={ref}>{isIntersected ? 'true' : 'false'}</div>;
 };
 ```
 
